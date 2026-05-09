@@ -1,0 +1,339 @@
+/* ===== Sentience — cosmic-biological ===== */
+:root{
+  --bg: #0a0e1a;
+  --bg-2: #11172a;
+  --bg-3: #19223c;
+  --line: rgba(220,228,240,0.10);
+  --line-2: rgba(220,228,240,0.22);
+  --ink: #e8eef5;
+  --ink-soft: #94a3bd;
+  --teal: #3ad6c8;     /* bioluminescent — primary accent */
+  --teal-2: #2ab8ac;
+  --amber: #e8a85c;    /* neuron firing */
+  --violet: #8a78c4;   /* abstraction layer */
+  --rose: #d6688a;     /* prediction error */
+  --olive: #9cab5a;    /* biology / phylogenetic */
+}
+[data-theme="light"]{
+  --bg: #f6f4ee;
+  --bg-2: #ffffff;
+  --bg-3: #ecebe2;
+  --line: rgba(20,24,40,0.10);
+  --line-2: rgba(20,24,40,0.24);
+  --ink: #161a26;
+  --ink-soft: #4f5765;
+  --teal: #1a8a82;
+  --teal-2: #146e68;
+  --amber: #a87a23;
+  --violet: #5a4a8a;
+  --rose: #a83d6e;
+  --olive: #5d6a23;
+}
+
+*{box-sizing: border-box}
+html, body{margin: 0; padding: 0}
+html{scroll-behavior: smooth; scroll-padding-top: 72px}
+body{
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 17px; line-height: 1.65;
+  color: var(--ink); background: var(--bg);
+  background-image:
+    radial-gradient(1100px 700px at 12% -10%, rgba(58,214,200,0.10), transparent 60%),
+    radial-gradient(800px 600px at 110% 25%, rgba(232,168,92,0.07), transparent 60%),
+    radial-gradient(700px 500px at 50% 110%, rgba(138,120,196,0.07), transparent 60%);
+}
+[data-theme="light"] body{
+  background-image:
+    radial-gradient(1100px 700px at 12% -10%, rgba(26,138,130,0.07), transparent 60%),
+    radial-gradient(800px 600px at 110% 25%, rgba(168,122,35,0.05), transparent 60%),
+    radial-gradient(700px 500px at 50% 110%, rgba(90,74,138,0.05), transparent 60%);
+}
+
+a{color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 3px}
+a:hover{text-decoration-color: var(--teal)}
+em{font-style: italic; color: var(--teal)}
+code, .mono{font-family: "JetBrains Mono", ui-monospace, monospace}
+
+/* Bilingual */
+[lang="zh"]{display: none}
+html[data-lang="zh"] [lang="en"]{display: none}
+html[data-lang="zh"] [lang="zh"]{display: initial}
+html svg [lang="zh"]{display: none}
+html[data-lang="zh"] svg [lang="zh"]{display: inline}
+html[data-lang="zh"] svg [lang="en"]{display: none}
+html[data-lang="zh"]{font-family: "Noto Serif SC", "Source Han Serif SC", "Source Serif 4", Georgia, serif;}
+
+/* Topbar */
+.topbar{
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in oklab, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.topbar-inner{
+  max-width: 1320px; margin: 0 auto;
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 18px;
+}
+.brand{
+  display: flex; align-items: center; gap: 12px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px; font-weight: 600; letter-spacing: -.005em;
+  text-decoration: none; color: var(--ink);
+}
+.brand .seal{
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--teal);
+  flex-shrink: 0;
+}
+.brand .seal svg{width: 26px; height: 26px; display: block}
+.brand em{color: var(--teal); font-style: italic; font-weight: 600}
+.nav{display: flex; gap: 14px; flex-wrap: wrap; margin-left: 8px}
+.nav a{
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: .06em;
+  text-transform: uppercase; text-decoration: none;
+  color: var(--ink-soft);
+  padding: 6px 0; border-bottom: 1px solid transparent;
+}
+.nav a:hover{color: var(--ink); border-bottom-color: var(--teal)}
+.toolbar{margin-left: auto; display: flex; gap: 10px}
+.lang-toggle, .theme-toggle{
+  display: inline-flex; gap: 0;
+  border: 1px solid var(--line); border-radius: 4px; overflow: hidden;
+}
+.lang-toggle button, .theme-toggle button{
+  font-family: "JetBrains Mono", monospace; font-size: 11px;
+  background: transparent; color: var(--ink-soft);
+  border: none; border-right: 1px solid var(--line);
+  padding: 5px 10px; cursor: pointer; letter-spacing: .04em;
+}
+.lang-toggle button:last-child, .theme-toggle button:last-child{border-right: none}
+.lang-toggle button.active, .theme-toggle button.active{background: var(--teal); color: var(--bg)}
+
+/* Hero */
+.hero{ max-width: 1320px; margin: 0 auto; padding: 90px 24px 60px; position: relative; overflow: hidden;}
+.hero::before{
+  content: ""; position: absolute; top: 5%; right: -8%; width: 600px; height: 600px;
+  background-image: radial-gradient(circle at center, var(--teal), transparent 50%);
+  opacity: 0.08; pointer-events: none;
+}
+.hero-eyebrow{
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; letter-spacing: .14em;
+  color: var(--teal); text-transform: uppercase;
+  margin-bottom: 24px; position: relative;
+}
+.hero h1{
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  font-size: clamp(40px, 6vw, 78px);
+  line-height: 1.04; letter-spacing: -.012em;
+  margin: 0 0 18px; max-width: 18ch; position: relative;
+}
+.hero h1 em{
+  font-style: italic;
+  background: linear-gradient(120deg, var(--teal), var(--violet), var(--amber));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-sub{
+  font-family: "Cormorant Garamond", serif;
+  font-size: 24px; line-height: 1.35;
+  color: var(--ink-soft); font-style: italic;
+  font-weight: 400; max-width: 60ch;
+  margin: 0 0 24px; position: relative;
+}
+.hero-lede{
+  font-size: 19px; line-height: 1.6;
+  max-width: 64ch; color: var(--ink-soft);
+  margin: 0 0 28px; position: relative;
+}
+.hero-thesis{
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px; margin-top: 40px; position: relative;
+}
+.hero-thesis div{
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  padding: 18px; border-radius: 4px;
+}
+.hero-thesis div:nth-child(1){border-top: 3px solid var(--teal)}
+.hero-thesis div:nth-child(2){border-top: 3px solid var(--amber)}
+.hero-thesis div:nth-child(3){border-top: 3px solid var(--violet)}
+.hero-thesis div:nth-child(4){border-top: 3px solid var(--rose)}
+.hero-thesis strong{
+  font-family: "JetBrains Mono", monospace; font-weight: 500;
+  font-size: 11px; letter-spacing: .12em;
+  color: var(--teal); text-transform: uppercase;
+  display: block; margin-bottom: 8px;
+}
+
+/* Sections */
+section{ max-width: 1320px; margin: 0 auto; padding: 72px 24px; border-top: 1px solid var(--line); }
+section.no-rule{border-top: none}
+.section-eyebrow{
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: .14em;
+  color: var(--teal); text-transform: uppercase;
+  margin: 0 0 14px;
+}
+.section-title{
+  font-family: "Cormorant Garamond", serif; font-weight: 500;
+  font-size: clamp(30px, 3.6vw, 46px);
+  line-height: 1.15; margin: 0 0 16px;
+  letter-spacing: -.005em;
+}
+.section-lede{
+  font-size: 18px; line-height: 1.6; color: var(--ink-soft);
+  max-width: 72ch; margin: 0 0 32px;
+}
+.epistemic{
+  display: inline-block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: .08em;
+  color: var(--amber); text-transform: uppercase;
+  border: 1px solid var(--line); border-radius: 3px;
+  padding: 4px 10px; margin-bottom: 14px;
+}
+
+/* Brain SVG canvas */
+.bio-canvas{
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--bg-2); overflow: hidden;
+}
+.bio-canvas svg{display: block; width: 100%; height: auto}
+
+/* Phylogenetic timeline */
+.phylo-wrap{
+  border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg-2); overflow: hidden;
+}
+.phylo-row{
+  display: grid; grid-template-columns: 220px 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.phylo-row:last-child{border-bottom: none}
+.phylo-row > div{padding: 22px 24px}
+.phylo-row .head{
+  border-right: 1px dashed var(--line);
+  background: color-mix(in oklab, var(--bg-3) 50%, var(--bg-2));
+}
+.phylo-row .head h4{
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px; font-weight: 600; margin: 0 0 4px; line-height: 1.2;
+}
+.phylo-row .head .when{
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; color: var(--amber); letter-spacing: .04em;
+}
+.phylo-row .body p{margin: 0 0 8px; line-height: 1.6}
+
+/* Cards */
+.grid{ display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grid.two{grid-template-columns: repeat(auto-fit, minmax(380px, 1fr))}
+.grid.three{grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))}
+.card{
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  border-radius: 4px; padding: 22px;
+  position: relative;
+}
+.card.teal{border-top: 3px solid var(--teal)}
+.card.amber{border-top: 3px solid var(--amber)}
+.card.violet{border-top: 3px solid var(--violet)}
+.card.rose{border-top: 3px solid var(--rose)}
+.card.olive{border-top: 3px solid var(--olive)}
+.card h3{
+  font-family: "Cormorant Garamond", serif; font-weight: 600;
+  font-size: 22px; margin: 0 0 8px; line-height: 1.2;
+}
+.card .meta{
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: .08em;
+  color: var(--teal); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.card.amber .meta{color: var(--amber)}
+.card.violet .meta{color: var(--violet)}
+.card.rose .meta{color: var(--rose)}
+.card.olive .meta{color: var(--olive)}
+.card p{margin: 0 0 10px; line-height: 1.55}
+
+/* Simulator */
+.sim{
+  display: grid; grid-template-columns: 320px 1fr; gap: 24px;
+  border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg-2); padding: 24px;
+}
+.sim-controls .ctrl{margin-bottom: 18px}
+.sim-controls label{
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-soft); display: block; margin-bottom: 6px;
+}
+.sim-controls input[type="range"]{ width: 100%; accent-color: var(--teal); }
+.sim-controls .val{
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+  color: var(--teal); float: right;
+}
+.sim-output{display: flex; flex-direction: column; gap: 16px}
+.sim-meter{
+  display: grid; grid-template-columns: 200px 1fr 60px;
+  gap: 12px; align-items: center;
+  font-family: "JetBrains Mono", monospace; font-size: 12px;
+}
+.sim-meter .bar{ height: 8px; background: var(--bg-3); border-radius: 4px; overflow: hidden; }
+.sim-meter .bar-fill{
+  height: 100%;
+  background: linear-gradient(90deg, var(--violet), var(--teal), var(--amber));
+  transition: width .25s ease;
+}
+.sim-meter .num{text-align: right; color: var(--teal)}
+.sim-summary{
+  margin-top: 8px; padding: 16px;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 4px;
+  font-style: italic; color: var(--ink-soft); font-size: 15px; line-height: 1.6;
+}
+
+/* AI Q&A */
+.ai-panel{
+  border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg-2); padding: 24px;
+}
+.ai-q{
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px; font-weight: 500; margin: 0 0 8px;
+  line-height: 1.25;
+}
+.ai-q::before{content: "◐ "; color: var(--teal)}
+.ai-a{
+  margin: 0 0 24px;
+  padding-left: 22px; border-left: 2px solid var(--teal);
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+}
+.ai-a:last-child{margin-bottom: 0}
+
+/* Footer */
+footer{
+  max-width: 1320px; margin: 0 auto; padding: 48px 24px 64px;
+  border-top: 1px solid var(--line);
+  font-size: 14px; color: var(--ink-soft);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+footer a{color: var(--ink-soft)}
+
+/* Responsive */
+@media (max-width: 900px){
+  .nav{display: none}
+  .sim{grid-template-columns: 1fr}
+  .phylo-row{grid-template-columns: 1fr}
+  .phylo-row .head{border-right: none; border-bottom: 1px dashed var(--line)}
+}
+@media (max-width: 600px){
+  .topbar-inner{padding: 10px 16px; gap: 10px}
+  .hero{padding: 56px 16px 36px}
+  section{padding: 56px 16px}
+}
